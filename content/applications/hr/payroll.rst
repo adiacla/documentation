@@ -59,25 +59,21 @@ are correctly entered.
 New work entry type
 ~~~~~~~~~~~~~~~~~~~
 
-To create a new work entry type, click the :guilabel:`Create` button. Enter the information on the
+To create a new work entry type, click the :guilabel:`New` button, and enter the information on the
 form:
 
 - :guilabel:`Work Entry Type Name`: The name should be short and descriptive, such as `Sick Time` or
   `Public Holiday`.
-- :guilabel:`Code`: This code appears with the work entry type on timesheets and payslips. Since the
-  code is used in conjunction with the *Accounting* application, it is advised to check with the
-  accounting department for a code to use.
-- :guilabel:`Sequence`: The sequence determines the order that the work entry is computed in the
-  payslip list.
-- Check boxes: If any of the items in the list applies to the work entry, check off the box by
-  clicking it. If :guilabel:`Time Off` is checked off, a :guilabel:`Time Off Type` field appears.
-  This field has a drop-down menu to select the specific type of time off, or a new type of time off
-  can be entered.
-
-.. image:: payroll/new-work-entry.png
-   :align: center
-   :alt: New work entry type form.
-
+- :guilabel:`Payroll Code`: This code appears with the work entry type on timesheets and payslips.
+  Since the code is used in conjunction with the *Accounting* application, it is advised to check
+  with the accounting department for a code to use.
+- :guilabel:`DMFA code`: This code is used to identify DMFA entries on a corresponding DMFA report,
+  and is for Belgian-based companies only.
+- :guilabel:`External Code`: This code is used for exporting data to a third-party. Refer to the
+  third-party being used in order to determine the code to enter.
+- :guilabel:`SDWorx code`: This code is only for companies that use SDWorx, a payroll service
+  provider.
+- :guilabel:`Color`: Select a color for the particular work entry type.
 - :guilabel:`Rounding`: The rounding method determines how timesheet entries are displayed on the
   payslip.
 
@@ -91,31 +87,38 @@ form:
    entry remains 5.5 hours. If :guilabel:`Rounding` is set to :guilabel:`Half Day`, the entry is
    changed to 4 hours. If it is set to :guilabel:`Day`, it is changed to 8 hours.
 
-Working times
--------------
+- :guilabel:`Unpaid in Structures Types`: If the work entry is for unpaid work, specify which pay
+  structure the work entry applies to from the drop-down menu.
+- Check boxes: If any of the items in the list applies to the work entry, check off the box by
+  clicking it. If :guilabel:`Time Off` is checked off, a :guilabel:`Time Off Type` field appears.
+  This field has a drop-down menu to select the specific type of time off, or a new type of time off
+  can be entered.
 
-To view the currently configured working times, go to :menuselection:`Payroll --> Configuration -->
-Working Times`. The working times that are available for an employee's contracts and work entries
-are found in this list.
-
-Working times are company-specific. Each company must identify each type of working time they use.
-For example, an Odoo database containing multiple companies that use a standard 40-hour work week
-needs to have a separate working time entry for each company that uses the 40-hour standard work
-week.
-
-.. image:: payroll/working-times.png
+.. image:: payroll/new-work-entry.png
    :align: center
-   :alt: All working times currently set up in the database.
+   :alt: New work entry type form.
 
-New working time
-~~~~~~~~~~~~~~~~
+Working schedules
+-----------------
 
-To create a new working time, click the :guilabel:`Create` button. Enter the information on the
+To view the currently configured working schedules, go to :menuselection:`Payroll --> Configuration
+--> Working Schedules`. The working schedules that are available for an employee's contracts and
+work entries are found in this list.
+
+Working schedules are company-specific. Each company must identify each type of working schedule
+they use. For example, an Odoo database containing multiple companies that use a standard 40-hour
+work week needs to have a separate working schedule entry for each company that uses the 40-hour
+standard work week.
+
+.. image:: payroll/working-schedules.png
+   :align: center
+   :alt: All working schedules currently set up in the database.
+
+New working schedule
+~~~~~~~~~~~~~~~~~~~~
+
+To create a new working schedule, click the :guilabel:`New` button, and enter the information on the
 form.
-
-.. image:: payroll/new-working-times.png
-   :align: center
-   :alt: New working type form.
 
 The fields are auto-populated for a regular 40-hour work week but can be modified. First, change the
 name of the working time by modifying the text in the :guilabel:`Name` field. Next, make any
@@ -130,8 +133,13 @@ by typing in the time.
    The :guilabel:`Work From` and :guilabel:`Work To` times must be in a 24-hour format. For example,
    `2:00 PM` would be entered as `14:00`.
 
-If the working time should be in a two-week configuration, click the :guilabel:`Switch To 2 Week
-Calendar` button. This creates entries for an :guilabel:`Even week` and an :guilabel:`Odd week`.
+If the working time should be in a two-week configuration, click the :guilabel:`Switch to 2 weeks
+calendar` button in the top left. This creates entries for an :guilabel:`Even week` and an
+:guilabel:`Odd week`.
+
+.. image:: payroll/new-working-schedule.png
+   :align: center
+   :alt: New working schedule form.
 
 Salary
 ======
@@ -164,9 +172,8 @@ There are two default structure types configured in Odoo: *Employee* and *Worker
    :align: center
    :alt: List of all structure types.
 
-Click the :guilabel:`Create` button to make a new structure type. Most fields are pre-populated, but
-all fields can be edited. Once the fields are edited, click the :guilabel:`Save` button to save the
-changes, or click :guilabel:`Discard` to delete the entry.
+Click the :guilabel:`New` button to make a new structure type. Most fields are pre-populated, but
+all fields can be edited.
 
 .. image:: payroll/new-structure.png
    :align: center
@@ -185,12 +192,12 @@ useful to add may be a `Bonus`.
 To view all the various structures for each structure type, go to :menuselection:`Payroll -->
 Configuration --> Structures`.
 
+Each :ref:`structure type <payroll/structure-types>` lists the various structures associated with
+it. Each structure contains a set of rules that define it.
+
 .. image:: payroll/salary-structure.png
    :align: center
    :alt: All available salary structures.
-
-Each :ref:`structure type <payroll/structure-types>` lists the various structures associated with
-it. Each structure contains a set of rules that define it.
 
 Click on a structure to view its :guilabel:`Salary Rules`. These rules are what calculate the
 payslip for the employee.
@@ -213,12 +220,8 @@ structure (such as :guilabel:`Regular Pay`) to view all the rules.
    :align: center
    :alt: Rules for each salary structure type.
 
-To make a new rule, click :guilabel:`Create`. A new rule form appears. Enter the information in the
-fields, then click :guilabel:`Save`.
-
-.. image:: payroll/new-rule.png
-   :align: center
-   :alt: Enter the information for the new rule.
+To make a new rule, click :guilabel:`New`. A new rule form appears. Enter the information in the
+fields.
 
 The required fields for a rule are:
 
@@ -237,6 +240,10 @@ The required fields for a rule are:
   the amount is a :guilabel:`Fixed Amount`, a :guilabel:`Percentage (%)`, or a :guilabel:`Python
   Code`. Depending on what is selected, the fixed amount, percentage, or Python code needs to be
   entered next.
+
+.. image:: payroll/new-rule.png
+   :align: center
+   :alt: Enter the information for the new rule.
 
 Rule parameters
 ---------------
@@ -257,10 +264,9 @@ like expenses, reimbursements, or deductions. These other inputs can be configur
    :align: center
    :alt: Other input types for payroll.
 
-To create a new input type, click the :guilabel:`Create` button. Enter the :guilabel:`Description`,
-the :guilabel:`Code`, and which structure it applies to in the :guilabel:`Availability in Structure`
-field. Click the :guilabel:`Save` button to save the changes, or click :guilabel:`Discard` to delete
-the entry.
+To create a new input type, click the :guilabel:`New` button. Enter the :guilabel:`Description`, the
+:guilabel:`Code`, and which structure it applies to in the :guilabel:`Availability in Structure`
+field.
 
 .. image:: payroll/input-type-new.png
    :align: center
@@ -271,8 +277,8 @@ Salary package configurator
 
 The various options under the :guilabel:`Salary Package Configurator` section of the
 :menuselection:`Payroll --> Configuration` menu all affect an employee's potential salary. These
-sections (:guilabel:`Advantages`, :guilabel:`Personal Info`, and :guilabel:`Resume`) specify what
-benefits can be offered to an employee in their salary package.
+sections (:guilabel:`Advantages`, :guilabel:`Personal Info`, :guilabel:`Resume`, and
+:guilabel:`Offers`) specify what benefits can be offered to an employee in their salary package.
 
 Depending on what information an employee enters (such as deductions, dependents, etc.), their
 salary is adjusted accordingly. When an applicant applies for a job on the company website, the
@@ -293,13 +299,7 @@ are grouped by :guilabel:`Structure type`.
    :align: center
    :alt: Settings available for payroll.
 
-To make a new advantage, click the :guilabel:`Create` button. Enter the information in the fields,
-then click the :guilabel:`Save` button to save the changes, or click :guilabel:`Discard` to delete
-the entry.
-
-.. image:: payroll/new-advantage.png
-   :align: center
-   :alt: List of advantages employee's can have.
+To make a new advantage, click the :guilabel:`New` button, and enter the information in the fields.
 
 The required fields for an advantage are:
 
@@ -311,15 +311,25 @@ The required fields for an advantage are:
   :guilabel:`Monthly Advantages in Cash`, or :guilabel:`Yearly Advantages in Cash`.
 - :guilabel:`Salary Structure Type`: Select from the drop-down menu which salary structure type this
   advantage applies to.
+- :guilabel:`Display Type`: Select from the drop-down menu how this advantage is displayed.
+
+.. image:: payroll/new-advantage.png
+   :align: center
+   :alt: List of advantages employee's can have.
 
 Personal info
 -------------
 
-Every employee in Odoo has an *employee card* that includes all of their personal information,
-resume, work information, and documents. To view an employee's card, go to the main
-:menuselection:`Payroll` app dashboard, and click on the employee's card, or go to
-:menuselection:`Payroll --> Employees --> Employees` and click on the employee's card. Employee
-cards can also be viewed by going to the :menuselection:`Employees` app.
+Every employee in Odoo has an *employee card* which is created when a candidate becomes an
+employee. This card includes all of their personal information, resume, work information, and
+documents.
+
+The personal information is gathered from the salary package configurator section that a
+candidate fills out after being offered a position. This personal information is then transferred to
+the employee card when they are hired.
+
+To view an employee's card, go to the main :menuselection:`Employees` app dashboard, and click on
+the employee's card.
 
 .. note::
    An employee card can be thought of as an employee personnel file.
@@ -332,28 +342,37 @@ Personal Info`.
    :align: center
    :alt: Personal information that appear on employee cards to enter.
 
-To edit an entry, select it from the list. Then, click the :guilabel:`Edit` button, and modify the
-entry. When done, click :guilabel:`Save` or :guilabel:`Discard` to save the information or cancel
-the edits.
+To edit an entry, select it from the list, and modify the entry. To make a new entry, click the
+:guilabel:`New` button.
+
+The required fields, aside from entering the :guilabel:`Information` name, are
+:guilabel:`Related Field` and :guilabel:`Category`. Select a :guilabel:`Related Field` from the
+drop-down menu that best describes what type of field this entry is related to. Select a
+:guilabel:`Category` from the drop-down menu that the information should be under, such as
+:guilabel:`Address` or :guilabel:`Personal Documents`.
+
+The two most important fields on the personal info form are :guilabel:`Is Required` and
+:guilabel:`Display Type`. Checking the :guilabel:`Is Required` box makes the field mandatory on the
+employee's card. The :guilabel:`Display Type` drop-down menu allows for the information to be
+entered in a variety of ways, from a :guilabel:`Text` box, to a customizable :guilabel:`Radio`
+button, a :guilabel:`Checkbox`, a :guilabel:`Document`, and more.
 
 .. image:: payroll/personal-new.png
    :align: center
    :alt: New personal information entry.
-
-The two most important fields on the personal info form are :guilabel:`Is Required` and
-:guilabel:`Display Type`. Checking the :guilabel:`Is Required` box makes the field mandatory on the
-employee's card.
-
-The :guilabel:`Display Type` drop-down menu allows for the information to be entered in a variety of
-ways, from a :guilabel:`Text` box, to a customizable :guilabel:`Radio` button, a
-:guilabel:`Checkbox`, a :guilabel:`Document`, and more.
-
-Once the information is entered, click the :guilabel:`Save` button to save the entry.
 
 Resume
 ------
 
 .. note::
    Currently, the :guilabel:`Resume` feature found inside the :menuselection:`Payroll app -->
+   Configuration` menu is still in development and only serves a specific use case for Belgian
+   markets. The documentation will be updated when this section has matured to more markets.
+
+Offers
+------
+
+.. note::
+   Currently, the :guilabel:`Offers` feature found inside the :menuselection:`Payroll app -->
    Configuration` menu is still in development and only serves a specific use case for Belgian
    markets. The documentation will be updated when this section has matured to more markets.
