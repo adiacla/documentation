@@ -2,24 +2,20 @@
 Online
 ======
 
+Online instances are accessed using any web browser and do not require a local installation.
+
 Demo
 ----
 
-To simply get a quick idea of Odoo, demo_ instances are available. They are
-shared instances which only live for a few hours, and can be used to browse
-around and try things out with no commitment.
-
-Demo_ instances require no local installation, just a web browser.
+To quickly try out Odoo, shared `demo <https://demo.odoo.com>`_ instances are available. No
+registration is required, but each instance only lives for a few hours.
 
 Odoo Online
 -----------
 
-Trivial to start with, fully managed and migrated by Odoo S.A., `Odoo Online`_
-provides private instances and starts out free. It can be used to discover and
-test Odoo and do non-code customizations (i.e. incompatible with custom modules
-or the Odoo Apps Store) without having to install it locally.
+`Odoo Online <https://www.odoo.com/trial>`_ provides private instances which are fully managed and
+hosted by Odoo. It can be used for long-term production or to test Odoo thoroughly, including
+customizations that don't require code.
 
-Can be used for both testing Odoo and long-term production use.
-
-Like demo_ instances, `Odoo Online`_ instances require no local installation, a web
-browser is sufficient.
+.. note::
+   Odoo Online is incompatible with custom modules or the Odoo App Store.
