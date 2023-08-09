@@ -1,3 +1,7 @@
+# administration/install
+
+administration/install/install.rst administration/install.rst
+
 # applications/finance
 
 applications/finance/accounting/bank/feeds/bank_statements.rst applications/finance/accounting/bank/feeds/transactions.rst            # bank_statements -> transactions
