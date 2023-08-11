@@ -1,69 +1,53 @@
-==============
-Source install
-==============
+======
+Source
+======
 
-The source "installation" is really about not installing Odoo, and running it directly from source
+The source 'installation' is not about installing Odoo but running it directly from the source
 instead.
 
-It can be more convenient for module developers as the Odoo source is more easily accessible than
-using packaged installation.
+Using the Odoo source can be more convenient for module developers as it is more easily accessible
+than using packaged installers.
 
-It also makes starting and stopping Odoo more flexible and explicit than the services set up by the
-packaged installations, and allows overriding settings using
-:ref:`command-line parameters <reference/cmdline>` without needing to edit a configuration file.
+It makes starting and stopping Odoo more flexible and explicit than the services set up by the
+packaged installers. Also, it allows overriding settings using :ref:`command-line parameters
+<reference/cmdline>` without needing to edit a configuration file.
 
-Finally it provides greater control over the system's set up, and allows to more easily keep
-(and run) multiple versions of Odoo side-by-side.
+Finally, it provides greater control over the system's setup and allows to more easily keep (and
+run) multiple versions of Odoo side-by-side.
 
 Fetch the sources
 -----------------
 
-There are two ways to obtain the source code of Odoo: as a zip **archive** or through **git**.
+There are two ways to obtain the source code of Odoo: as a ZIP **archive** or through **Git**.
 
 Archive
 ~~~~~~~
 
-Community Edition:
+Community edition:
 
-* `Official download page <download_>`_
-* `GitHub repository <community-repository_>`_
-* `Nightly server <nightly_>`_
+- `Odoo download page <https://www.odoo.com/page/download>`_
+- `GitHub Community repository <https://github.com/odoo/odoo>`_
+- `Nightly server <https://nightly.odoo.com>`_
 
-Enterprise Edition:
+Enterprise edition:
 
-* `Official download page <download_>`_
-* `GitHub repository <enterprise-repository_>`_
+- `Odoo download page <https://www.odoo.com/page/download>`_
+- `GitHub Enterprise repository <https://github.com/odoo/enterprise>`_
 
-.. _setup/install/source/git:
+.. _install/source/git:
 
 Git
 ~~~
 
-The following requires `Git <git_>`_ to be installed on your machine and that you have basic
-knowledge of Git commands. To clone a Git repository, you must choose between cloning with HTTPS or
-SSH. If you do not know the difference between the two, the best option is most likely HTTPS. If you
-are following the :doc:`Getting started </developer/tutorials/getting_started>` developer tutorial,
-or plan on contributing to Odoo source code, choose SSH.
+.. note::
+   It is required to have `Git <https://git-scm.com/>`_ installed, and it is recommended to have a
+   basic knowledge of Git commands to proceed.
+
+To clone a Git repository, choose between cloning with HTTPS or SSH. In most cases, the best option
+is HTTPS. However, choose SSH to contribute to Odoo source code or when following the :doc:`Getting
+Started developer tutorial </developer/tutorials/getting_started>`.
 
 .. tabs::
-
-   .. group-tab:: Windows
-
-      .. tabs::
-
-         .. tab:: Clone with HTTPS
-
-            .. code-block:: doscon
-
-               C:\> git clone https://github.com/odoo/odoo.git
-               C:\> git clone https://github.com/odoo/enterprise.git
-
-         .. tab:: Clone with SSH
-
-            .. code-block:: doscon
-
-               C:\> git clone git@github.com:odoo/odoo.git
-               C:\> git clone git@github.com:odoo/enterprise.git
 
    .. group-tab:: Linux
 
@@ -82,6 +66,24 @@ or plan on contributing to Odoo source code, choose SSH.
 
                $ git clone git@github.com:odoo/odoo.git
                $ git clone git@github.com:odoo/enterprise.git
+
+   .. group-tab:: Windows
+
+      .. tabs::
+
+         .. tab:: Clone with HTTPS
+
+            .. code-block:: doscon
+
+               C:\> git clone https://github.com/odoo/odoo.git
+               C:\> git clone https://github.com/odoo/enterprise.git
+
+         .. tab:: Clone with SSH
+
+            .. code-block:: doscon
+
+               C:\> git clone git@github.com:odoo/odoo.git
+               C:\> git clone git@github.com:odoo/enterprise.git
 
    .. group-tab:: Mac OS
 
@@ -103,13 +105,12 @@ or plan on contributing to Odoo source code, choose SSH.
 
 .. note::
    **The Enterprise git repository does not contain the full Odoo source code**. It is only a
-   collection of extra add-ons. The main server code is in the Community version. Running the
-   Enterprise version actually means running the server from the Community version with the
-   addons-path option set to the folder with the Enterprise version. You need to clone both the
-   Community and Enterprise repository to have a working Odoo Enterprise installation. See
-   :ref:`setup/install/editions` to get access to the Enterprise repository.
+   collection of extra add-ons. The main server code is in the Community edition. Running the
+   Enterprise version means running the server from the Community version with the `addons-path`
+   option set to the folder with the Enterprise edition. It is required to clone both the Community
+   and Enterprise repositories to have a working Odoo Enterprise installation.
 
-.. _setup/install/source/prepare:
+.. _install/source/prepare:
 
 Prepare
 -------
@@ -117,63 +118,68 @@ Prepare
 Python
 ~~~~~~
 
+Odoo requires **Python 3.7** or later to run.
+
 .. tabs::
+
+   .. group-tab:: Linux
+
+      Use a package manager to download and install Python 3 if needed.
 
    .. group-tab:: Windows
 
-      Odoo requires Python 3.7 or later to run. Visit `Python's download page <https://www.python.org/downloads/windows/>`_
-      to download and install the latest version of Python 3 on your machine.
+      `Download the latest version of Python 3 <https://www.python.org/downloads/windows/>`_ and
+      install it.
 
-      During installation, check **Add Python 3 to PATH**, then click **Customize Installation** and make
-      sure that **pip** is checked.
+      During installation, check **Add Python 3 to PATH**, then click **Customize Installation** and
+      make sure that **pip** is checked.
 
-      .. note::
-         If Python 3 is already installed, make sure that the version is 3.7 or above, as previous
-         versions are not compatible with Odoo.
+   .. group-tab:: Mac OS
+
+      Use a package manager (`Homebrew <https://brew.sh/>`_, `MacPorts <https://www.macports.org>`_)
+      to download and install Python 3 if needed.
+
+.. note::
+   If Python 3 is already installed, make sure that the version is 3.7 or above, as previous
+   versions are not compatible with Odoo.
+
+   .. tabs::
+
+      .. group-tab:: Linux
+
+         .. code-block:: console
+
+            $ python3 --version
+
+      .. group-tab:: Windows
 
          .. code-block:: doscon
 
             C:\> python --version
 
-         Verify also that pip_ is installed for this version.
-
-         .. code-block:: doscon
-
-            C:\> pip --version
-
-   .. group-tab:: Linux
-
-      Odoo requires Python 3.7 or later to run. Use your package manager to download and install Python 3
-      on your machine if it is not already done.
-
-      .. note::
-         If Python 3 is already installed, make sure that the version is 3.7 or above, as previous
-         versions are not compatible with Odoo.
+      .. group-tab:: Mac OS
 
          .. code-block:: console
 
             $ python3 --version
 
-         Verify also that pip_ is installed for this version.
+   Verify that `pip <https://pip.pypa.io>`_ is also installed for this version.
+
+   .. tabs::
+
+      .. group-tab:: Linux
 
          .. code-block:: console
 
             $ pip3 --version
 
-   .. group-tab:: Mac OS
+      .. group-tab:: Windows
 
-      Odoo requires Python 3.7 or later to run. Use your preferred package manager (homebrew_, macports_)
-      to download and install Python 3 on your machine if it is not already done.
+         .. code-block:: doscon
 
-      .. note::
-         If Python 3 is already installed, make sure that the version is 3.7 or above, as previous
-         versions are not compatible with Odoo.
+            C:\> pip --version
 
-         .. code-block:: console
-
-            $ python3 --version
-
-         Verify also that pip_ is installed for this version.
+      .. group-tab:: Mac OS
 
          .. code-block:: console
 
@@ -182,73 +188,74 @@ Python
 PostgreSQL
 ~~~~~~~~~~
 
+Odoo uses PostgreSQL as its database management system.
+
 .. tabs::
-
-   .. group-tab:: Windows
-
-      Odoo uses PostgreSQL as database management system. `Download and install PostgreSQL
-      <https://www.postgresql.org/download/windows/>`_ (supported version: 12.0 and later).
-
-      By default, the only user is `postgres` but Odoo forbids connecting as `postgres`, so you need
-      to create a new PostgreSQL user:
-
-      #. Add PostgreSQL's `bin` directory (by default:
-         :file:`C:\\Program Files\\PostgreSQL\\<version>\\bin`) to your `PATH`.
-      #. Create a postgres user with a password using the pg admin gui:
-
-         1. Open **pgAdmin**.
-         2. Double-click the server to create a connection.
-         3. Select :menuselection:`Object --> Create --> Login/Group Role`.
-         4. Enter the username in the **Role Name** field (e.g. `odoo`).
-         5. Open the **Definition** tab and enter the password (e.g. `odoo`), then click **Save**.
-         6. Open the **Privileges** tab and switch **Can login?** to `Yes` and **Create database?**
-            to `Yes`.
 
    .. group-tab:: Linux
 
-      Odoo uses PostgreSQL as database management system. Use your package manager to download and
-      install PostgreSQL (supported version: 12.0 and later).
-
+      Use a package manager to download and install PostgreSQL (supported versions: 12.0 or above).
       It can be achieved by executing the following:
 
       .. code-block:: console
 
-          $ sudo apt install postgresql postgresql-client
+         $ sudo apt install postgresql postgresql-client
 
-      By default, the only user is `postgres` but Odoo forbids connecting as `postgres`, so you need
-      to create a new PostgreSQL user:
+   .. group-tab:: Windows
 
-      .. code-block:: console
-
-        $ sudo -u postgres createuser -s $USER
-        $ createdb $USER
-
-      .. note::
-         Because your PostgreSQL user has the same name as your Unix login, you will be able to
-         connect to the database without password.
+      `Download PostgreSQL <https://www.postgresql.org/download/windows>`_ (supported versions: 12.0
+      or above) and install it.
 
    .. group-tab:: Mac OS
 
-      Odoo uses PostgreSQL as database management system. Use `postgres.app
-      <https://postgresapp.com>`_ to download and install PostgreSQL (supported version: 12.0 and
-      later).
+      Use `Postgres.app <https://postgresapp.com>`_ to download and install PostgreSQL (supported
+      version: 12.0 or above).
 
       .. tip::
-         To make the command line tools bundled with `postgres.app` available, make sure to setup your
-         `$PATH` variable by following the `Postgres.app CLI Tools Instructions
+         To make the command line tools bundled with Postgres.app available, make sure to set up the
+         `$PATH` variable by following the `Postgres.app CLI tools instructions
          <https://postgresapp.com/documentation/cli-tools.html>`_.
 
-      By default, the only user is `postgres` but Odoo forbids connecting as `postgres`, so you need
-      to create a new PostgreSQL user:
+By default, the only user is `postgres`. As Odoo forbids connecting as `postgres`, create a new
+PostgreSQL user.
+
+.. tabs::
+
+   .. group-tab:: Linux
 
       .. code-block:: console
 
-        $ sudo -u postgres createuser -s $USER
-        $ createdb $USER
+         $ sudo -u postgres createuser -s $USER
+         $ createdb $USER
 
       .. note::
-         Because your PostgreSQL user has the same name as your Unix login, you will be able to
-         connect to the database without password.
+         Because the PostgreSQL user has the same name as the Unix login, it is possible to connect
+         to the database without a password.
+
+   .. group-tab:: Windows
+
+      #. Add PostgreSQL's `bin` directory (by default:
+         :file:`C:\\Program Files\\PostgreSQL\\<version>\\bin`) to the `PATH`.
+      #. Create a postgres user with a password using the pg admin gui:
+
+         #. Open **pgAdmin**.
+         #. Double-click the server to create a connection.
+         #. Select :menuselection:`Object --> Create --> Login/Group Role`.
+         #. Enter the username in the **Role Name** field (e.g., `odoo`).
+         #. Open the **Definition** tab, enter a password (e.g., `odoo`), and click **Save**.
+         #. Open the **Privileges** tab and switch **Can login?** to `Yes` and **Create database?**
+            to `Yes`.
+
+   .. group-tab:: Mac OS
+
+      .. code-block:: console
+
+         $ sudo -u postgres createuser -s $USER
+         $ createdb $USER
+
+      .. note::
+         Because the PostgreSQL user has the same name as the Unix login, it is possible to connect
+         to the database without a password.
 
 .. _install/dependencies:
 
@@ -257,45 +264,10 @@ Dependencies
 
 .. tabs::
 
-   .. group-tab:: Windows
-
-      Before installing the dependencies, you must download and install the `Build Tools for Visual
-      Studio <https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019>`_.
-      When prompted, select **C++ build tools** in the **Workloads** tab and install them.
-
-      Odoo dependencies are listed in the `requirements.txt` file located at the root of the Odoo
-      community directory.
-
-      .. tip::
-         It can be preferable to not mix python modules packages between different instances of Odoo
-         or with your system. You can use virtualenv_ to create isolated Python environments.
-
-      Navigate to the path of your Odoo Community installation (`CommunityPath`) and run **pip** on
-      the requirements file in a terminal **with Administrator privileges**:
-
-      .. code-block:: doscon
-
-          C:\> cd \CommunityPath
-          C:\> pip install setuptools wheel
-          C:\> pip install -r requirements.txt
-
-      For languages with right-to-left interface (such as Arabic or Hebrew), the package `rtlcss`
-      is needed:
-
-      #. Download and install `nodejs <https://nodejs.org/en/download/>`_.
-      #. Install `rtlcss`:
-
-         .. code-block:: doscon
-
-             C:\> npm install -g rtlcss
-
-      #. Edit the System Environment's variable `PATH` to add the folder where `rtlcss.cmd` is
-         located (typically: :file:`C:\\Users\\<user>\\AppData\\Roaming\\npm\\`).
-
    .. group-tab:: Linux
 
-      Using your **distribution packages** is the preferred way of installing dependencies.
-      Alternatively, you can install the python dependencies with **pip**.
+      Using **distribution packages** is the preferred way of installing dependencies.
+      Alternatively, install the Python dependencies with **pip**.
 
       .. tabs::
 
@@ -313,32 +285,31 @@ Dependencies
 
          .. tab:: Install with pip
 
-            As some of the python packages need a compilation step, they require system libraries to
+            As some of the Python packages need a compilation step, they require system libraries to
             be installed.
 
-            On Debian/Ubuntu-based systems, the following command should install these required
-            libraries:
+            On Debian/Ubuntu, the following command should install these required libraries:
 
             .. code-block:: console
 
                $ sudo apt install python3-pip libldap2-dev libpq-dev libsasl2-dev
 
             Odoo dependencies are listed in the :file:`requirements.txt` file located at the root of
-            the Odoo community directory.
+            the Odoo Community directory.
 
             .. note::
-               | The python packages in :file:`requirements.txt` are based on their stable/LTS
-                 Debian/Ubuntu corresponding version at the moment of the Odoo release.
-               | E.g., for Odoo 15.0, the `python3-babel` package version is 2.8.0 in Debian
-                 Bullseye and 2.6.0 in Ubuntu Focal. The lowest version is then chosen in the
-                 :file:`requirements.txt`.
+               The Python packages in :file:`requirements.txt` are based on their stable/LTS
+               Debian/Ubuntu corresponding version at the moment of the Odoo release. For example,
+               for Odoo 15.0, the `python3-babel` package version is 2.8.0 in Debian Bullseye and
+               2.6.0 in Ubuntu Focal. The lowest version is then chosen in the
+               :file:`requirements.txt`.
 
             .. tip::
-               It can be preferable to not mix python modules packages between different instances
-               of Odoo or with your system. You can use virtualenv_ to create isolated Python
-               environments.
+               It can be preferable not to mix Python module packages between different instances of
+               Odoo or with the system. However, it is possible to use `virtualenv
+               <https://pypi.org/project/virtualenv/>`_ to create isolated Python environments.
 
-            Navigate to the path of your Odoo Community installation (:file:`CommunityPath`) and run
+            Navigate to the path of the Odoo Community installation (:file:`CommunityPath`) and run
             **pip** on the requirements file to install the requirements for the current user.
 
             .. code-block:: console
@@ -346,26 +317,40 @@ Dependencies
                $ cd /CommunityPath
                $ pip install -r requirements.txt
 
-      For languages with right-to-left interface (such as Arabic or Hebrew), the package `rtlcss` is
-      needed:
+   .. group-tab:: Windows
 
-      #. Download and install **nodejs** and **npm** with your package manager.
-      #. Install `rtlcss`:
+      Before installing the dependencies, download and install the `Build Tools for Visual
+      Studio <https://visualstudio.microsoft.com/downloads/>`_. Select **C++ build tools** in the
+      **Workloads** tab and install them when prompted.
 
-         .. code-block:: console
+      Odoo dependencies are listed in the `requirements.txt` file located at the root of the Odoo
+      Community directory.
 
-            $ sudo npm install -g rtlcss
+         .. tip::
+            It can be preferable not to mix Python module packages between different instances of
+            Odoo or with the system. However, it is possible to use `virtualenv
+            <https://pypi.org/project/virtualenv/>`_ to create isolated Python environments.
+
+      Navigate to the path of the Odoo Community installation (`CommunityPath`) and run **pip** on
+      the requirements file in a terminal **with Administrator privileges**:
+
+      .. code-block:: doscon
+
+         C:\> cd \CommunityPath
+         C:\> pip install setuptools wheel
+         C:\> pip install -r requirements.txt
 
    .. group-tab:: Mac OS
 
       Odoo dependencies are listed in the `requirements.txt` file located at the root of the Odoo
-      community directory.
+      Community directory.
 
-      .. tip::
-         It can be preferable to not mix python modules packages between different instances of Odoo
-         or with your system. You can use virtualenv_ to create isolated Python environments.
+         .. tip::
+            It can be preferable not to mix Python module packages between different instances of
+            Odoo or with the system. However, it is possible to use `virtualenv
+            <https://pypi.org/project/virtualenv/>`_ to create isolated Python environments.
 
-      Navigate to the path of your Odoo Community installation (`CommunityPath`) and run **pip** on
+      Navigate to the path of the Odoo Community installation (`CommunityPath`) and run **pip** on
       the requirements file:
 
       .. code-block:: console
@@ -375,7 +360,8 @@ Dependencies
          $ pip3 install -r requirements.txt
 
       .. warning::
-         Non-Python dependencies need to be installed with a package manager:
+         Non-Python dependencies must be installed with a package manager (`Homebrew
+         <https://brew.sh/>`_, `MacPorts <https://www.macports.org>`_).
 
          #. Download and install the **Command Line Tools**:
 
@@ -383,90 +369,115 @@ Dependencies
 
                $ xcode-select --install
 
-         #. Download and install the package manager of your choice (homebrew_, macports_).
-         #. Install non-python dependencies.
+         #. Use the package manager to install non-Python dependencies.
 
-      For languages with right-to-left interface (such as Arabic or Hebrew), the package `rtlcss` is
-      needed:
+.. note::
+   For languages using a **right-to-left interface** (such as Arabic or Hebrew), the `rtlcss`
+   package is required.
 
-      #. Download and install **nodejs** with your preferred package manager (homebrew_, macports_).
-      #. Install `rtlcss`:
+   .. tabs::
 
-         .. code-block:: console
+      .. group-tab:: Linux
 
-             $ sudo npm install -g rtlcss
+         #. Download and install **nodejs** and **npm** with a package manager.
+         #. Install `rtlcss`:
 
-.. important::
-   `wkhtmltopdf` is not installed through **pip** and must be installed manually in version `0.12.5
-   <the wkhtmltopdf download page_>`_ for it to support headers and footers. See our `wiki
-   <https://github.com/odoo/odoo/wiki/Wkhtmltopdf>`_ for more details on the various versions.
+            .. code-block:: console
 
-.. _setup/install/source/running_odoo:
+               $ sudo npm install -g rtlcss
+
+      .. group-tab:: Windows
+
+         #. Download and install `nodejs <https://nodejs.org/en/download>`_.
+         #. Install `rtlcss`:
+
+            .. code-block:: doscon
+
+               C:\> npm install -g rtlcss
+
+         #. Edit the system environment's variable `PATH` to add the folder where `rtlcss.cmd` is
+            located (typically: :file:`C:\\Users\\<user>\\AppData\\Roaming\\npm\\`).
+
+      .. group-tab:: Mac OS
+
+         #. Download and install **nodejs** with a package manager (`Homebrew <https://brew.sh/>`_,
+            `MacPorts <https://www.macports.org>`_).
+         #. Install `rtlcss`:
+
+            .. code-block:: console
+
+               $ sudo npm install -g rtlcss
+
+.. warning::
+   `wkhtmltopdf` is not installed through **pip** and must be installed manually in `version 0.12.5
+   <https://github.com/wkhtmltopdf/wkhtmltopdf/releases/tag/0.12.5>`_ for it to support headers and
+   footers. Check out the `wkhtmltopdf wiki <https://github.com/odoo/odoo/wiki/Wkhtmltopdf>`_ for
+   more details on the various versions.
+
+.. _install/source/running_odoo:
 
 Running Odoo
 ------------
 
-Once all dependencies are set up, Odoo can be launched by running `odoo-bin`, the
-command-line interface of the server. It is located at the root of the Odoo Community directory.
+Once all dependencies are set up, Odoo can be launched by running `odoo-bin`, the command-line
+interface of the server. It is located at the root of the Odoo Community directory.
 
-To configure the server, you can either specify :ref:`command-line arguments
-<reference/cmdline/server>` or a :ref:`configuration file <reference/cmdline/config>`.
+To configure the server, either specify :ref:`command-line arguments <reference/cmdline/server>` or
+a :ref:`configuration file <reference/cmdline/config>`.
 
 .. tip::
-   For the Enterprise edition, you must add the path to the `enterprise` addons to the `addons-path`
-   argument. Note that it must come before the other paths in `addons-path` for addons to be loaded
+   For the Enterprise edition, add the path to the `enterprise` add-ons to the `addons-path`
+   argument. Note that it must come before the other paths in `addons-path` for add-ons to be loaded
    correctly.
 
 Common necessary configurations are:
 
 - PostgreSQL user and password.
-- Custom addon paths beyond the defaults, to load your own modules.
+- Custom addon paths beyond the defaults to load custom modules.
 
 A typical way to run the server would be:
 
 .. tabs::
 
+   .. group-tab:: Linux
+
+      .. code-block:: console
+
+         $ cd /CommunityPath
+         $ python3 odoo-bin --addons-path=addons -d mydb
+
+      Where `CommunityPath` is the path of the Odoo Community installation, and `mydb` is the name
+      of the PostgreSQL database.
+
    .. group-tab:: Windows
 
       .. code-block:: doscon
 
-          C:\> cd CommunityPath/
-          C:\> python odoo-bin -r dbuser -w dbpassword --addons-path=addons -d mydb
+         C:\> cd CommunityPath/
+         C:\> python odoo-bin -r dbuser -w dbpassword --addons-path=addons -d mydb
 
       Where `CommunityPath` is the path of the Odoo Community installation, `dbuser` is the
       PostgreSQL login, `dbpassword` is the PostgreSQL password, and `mydb` is the name of the
       PostgreSQL database.
 
-   .. group-tab:: Linux
-
-      .. code-block:: console
-
-          $ cd /CommunityPath
-          $ python3 odoo-bin --addons-path=addons -d mydb
-
-      Where `CommunityPath` is the path of the Odoo Community installation, and `mydb` is the name
-      of the PostgreSQL database.
-
    .. group-tab:: Mac OS
 
       .. code-block:: console
 
-          $ cd /CommunityPath
-          $ python3 odoo-bin --addons-path=addons -d mydb
+         $ cd /CommunityPath
+         $ python3 odoo-bin --addons-path=addons -d mydb
 
       Where `CommunityPath` is the path of the Odoo Community installation, and `mydb` is the name
       of the PostgreSQL database.
 
 After the server has started (the INFO log `odoo.modules.loading: Modules loaded.` is printed), open
-http://localhost:8069 in your web browser and log in with the base administrator account: Use
-`admin` for the :guilabel:`Email` and, again, `admin` for the :guilabel:`Password`. That's it, you
-just logged into your own Odoo database!
+http://localhost:8069 in a web browser and log into the Odoo database with the base administrator
+account: use `admin` as the email and, again, `admin` as the password.
 
 .. tip::
-   - From there, you can create and manage new :doc:`users
-     </applications/general/users/manage_users>`.
-   - The user account you use to log into Odoo's web interface differs from the :option:`--db_user
+   - From there, create and manage new :doc:`users </applications/users/manage_users>`.
+   - The user account used to log into Odoo's web interface differs from the :option:`--db_user
      <odoo-bin -r>` CLI argument.
 
 .. seealso::
-   :doc:`The exhaustive list of CLI arguments for odoo-bin </developer/reference/cli>`.
+   :doc:`The list of CLI arguments for odoo-bin </developer/reference/cli>`
