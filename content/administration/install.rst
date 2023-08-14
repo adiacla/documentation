@@ -36,7 +36,7 @@ functionalities, including functional support, upgrades, and hosting. `Pricing
 <https://www.odoo.com/pricing-plan>`_ starts from one app free.
 
 .. tip::
-   :doc:`Switch from Community to Enterprise <../maintain/enterprise>` at any time (except for
+   :doc:`Switch from Community to Enterprise <maintain/enterprise>` at any time (except for the
    source install).
 
 .. toctree::
